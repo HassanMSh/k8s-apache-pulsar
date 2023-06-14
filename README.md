@@ -1,4 +1,5 @@
-# k8s-apache-pulsar
+# Apache Pulsar
+
 
 ## value.yaml
 
@@ -103,27 +104,27 @@ You can use the script attached below.
 
 1. Enter the toolset container.
 
-	kubectl exec -it -n pulsar pulsar-toolset-0 -- /bin/bash
+`kubectl exec -it -n pulsar pulsar-toolset-0 -- /bin/bash`
 
 2. Perform a health check
 
-	bin/pulsar-admin brokers healthcheck
+`bin/pulsar-admin brokers healthcheck`
 
 3. In the toolset container, create a tenant named apache.
 
-	bin/pulsar-admin tenants create apache
+`bin/pulsar-admin tenants create apache`
 
 4. In the toolset container, create a namespace named pulsar in the tenant apache.
 
-	bin/pulsar-admin namespaces create apache/pulsar
+`bin/pulsar-admin namespaces create apache/pulsar`
 
 5. In the toolset container, create a topic test-topic with 4 partitions in the namespace apache/pulsar.
 
-	bin/pulsar-admin topics create-partitioned-topic apache/pulsar/test-topic -p 4
+`bin/pulsar-admin topics create-partitioned-topic apache/pulsar/test-topic -p 4`
 
 6. In the toolset container, list all the partitioned topics in the namespace apache/pulsar.
 
-	bin/pulsar-admin topics list-partitioned-topics apache/pulsar
+`bin/pulsar-admin topics list-partitioned-topics apache/pulsar`
 
 ### Script
 
@@ -141,7 +142,7 @@ Note: Java version 17+ is required.
 
 1. Expose Proxy 
 
-	minikube service pulsar-proxy -n pulsar -p clusterName
+`minikube service pulsar-proxy -n pulsar -p clusterName`
 
 2. Download the Apache Pulsar tarball
 3. Decompress the tarball based on your download file.
@@ -149,15 +150,15 @@ Note: Java version 17+ is required.
 	* Enter the directory of the decompressed download file.
 	* Expose PULSAR_HOME as the environment variable.
 
-	export PULSAR_HOME=$(pwd)
+`export PULSAR_HOME=$(pwd)`
 
 5. Create a subscription to consume messages from apache/pulsar/test-topic.
 
-	bin/pulsar-client consume -s sub apache/pulsar/test-topic  -n 0
+`bin/pulsar-client consume -s sub apache/pulsar/test-topic  -n 0`
 
 6. Open a new terminal. In the new terminal, create a producer and send 10 messages to the test-topic topic.
 
-	bin/pulsar-client produce apache/pulsar/test-topic  -m "---------hello apache pulsar-------" -n 10
+`bin/pulsar-client produce apache/pulsar/test-topic  -m "---------hello apache pulsar-------" -n 10`
 
 7. Verify the results.
 
@@ -193,7 +194,7 @@ There's a database related issue
 [issue](https://github.com/apache/pulsar-manager/issues/465)
 [Pulsar Manager Documentation](https://github.com/apache/pulsar-manager)
 
-Sources:
+## Sources:
 
 [Standalone](https://pulsar.apache.org/docs/3.0.x/getting-started-helm/)
 [Helm Deployment](https://pulsar.apache.org/docs/3.0.x/helm-deploy/)
